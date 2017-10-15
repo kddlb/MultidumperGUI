@@ -142,8 +142,16 @@ namespace MultidumperGUI
 
             _probeProcess.Exited += (sender, args) =>
             {
-             
-                
+                this.Dispatcher.Invoke(() =>
+                {
+                    thrProbe.Visibility = Visibility.Hidden;
+                    if (lstSubSongs.SelectedItems.Count != 0)
+                    {
+                        btnDump.IsEnabled = true;
+                    }
+
+                });
+
             };
 
             string lineD;
@@ -239,7 +247,10 @@ namespace MultidumperGUI
 
         private void lstSubSongs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            btnDump.IsEnabled = true;
+            if (!thrProbe.IsVisible)
+            {
+                btnDump.IsEnabled = true;
+            }
         }
 
         private void btnDump_Click(object sender, RoutedEventArgs e)
@@ -261,6 +272,12 @@ namespace MultidumperGUI
             };
             _dumpingProcess.Start();
             _dumpingProcess.BeginOutputReadLine();
+
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.Uri.ToString());
 
         }
     }
