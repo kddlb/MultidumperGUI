@@ -262,8 +262,8 @@ namespace MultidumperGUI
                 FileName = @"multidumper.exe",
                 Arguments = _ofDialog.FileName.EndsWith(".spc",StringComparison.InvariantCultureIgnoreCase) ||
                 _ofDialog.FileName.EndsWith(".sfm", StringComparison.InvariantCultureIgnoreCase)
-                ? $"\"{_ofDialog.FileName}\" {lstSubSongs.SelectedIndex} {_channelInfoParsed.Count}" :
-                    $"\"{_ofDialog.FileName}\" {lstSubSongs.SelectedIndex}",
+                ? $"\"{_ofDialog.FileName}\" {lstSubSongs.SelectedIndex} {_channelInfoParsed.Count} {(chkFX.IsChecked != null && chkFX.IsChecked.Value ? "" : "--nofx")}" :
+                    $"\"{_ofDialog.FileName}\" {lstSubSongs.SelectedIndex} {(chkFX.IsChecked != null && chkFX.IsChecked.Value ? "" : "--nofx")}",
                 UseShellExecute = false,
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
